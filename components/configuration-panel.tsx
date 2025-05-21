@@ -34,7 +34,7 @@ type ConfigurationPanelProps = {
 }
 
 // Speed options
-const speedOptions = [1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1028]
+const speedOptions = [1, 2, 4, 8, 16, 32, 64]
 
 export default function ConfigurationPanel({
   locations,
@@ -164,6 +164,13 @@ export default function ConfigurationPanel({
 
   // Handle run simulation
   const handleRunSimulation = () => {
+    // Ensure numSamples is at least 1 before running
+    if (simulationConfig.numSamples <= 0) {
+      setSimulationConfig((prev) => ({
+        ...prev,
+        numSamples: 100, // Default to 100 if invalid
+      }))
+    }
     onRunSimulation(simulationName)
   }
 
@@ -235,7 +242,11 @@ export default function ConfigurationPanel({
                 min="1"
                 max="1000"
                 value={simulationConfig.numSamples}
-                onChange={(e) => updateSimulationConfig("numSamples", Number.parseInt(e.target.value) || 100)}
+                onChange={(e) => {
+                  const value = e.target.value
+                  // Allow empty field but store as 0 temporarily
+                  updateSimulationConfig("numSamples", value === "" ? 0 : Number.parseInt(value) || 0)
+                }}
                 className="mt-1"
               />
             </div>

@@ -123,7 +123,7 @@ export default function WorkloadSimulator() {
 
   // Simulation configuration
   const [simulationConfig, setSimulationConfig] = useState<SimulationConfig>({
-    numSamples: 10000,
+    numSamples: 100,
     speed: 1,
     instantMode: false,
     workloadCountDistribution: initialWorkloadCountDistribution,
