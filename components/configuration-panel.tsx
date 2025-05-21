@@ -233,9 +233,9 @@ export default function ConfigurationPanel({
                 id="num-samples"
                 type="number"
                 min="1"
-                max="1000000"
+                max="1000"
                 value={simulationConfig.numSamples}
-                onChange={(e) => updateSimulationConfig("numSamples", Number.parseInt(e.target.value) || 10000)}
+                onChange={(e) => updateSimulationConfig("numSamples", Number.parseInt(e.target.value) || 100)}
                 className="mt-1"
               />
             </div>
